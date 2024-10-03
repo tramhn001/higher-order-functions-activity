@@ -11,7 +11,14 @@ WORDS = ["jumps", "laziest", "brown", "a", "quick", "fox", "the", "dog", "over"]
 # parameter on it. This will be very similar to the min_function_custom
 # developed in the Learn reading.
 def my_max(collection, key):
-    pass
+    max_item = collection[0]
+    max_value = key(collection[0])
+    for item in collection:
+        if key(item) > max_value:
+            max_value = key(item)
+            max_item = item
+    return max_item
+
 
 # Implement a custom version of filter, called my_filter
 # my_filter takes a function (should_keep) which it will call on every item in
@@ -22,7 +29,8 @@ def my_max(collection, key):
 def my_filter(should_keep, collection):
     # if you've encountered list comprehensions, this would be a
     # great place to use one
-    pass
+    filtered_items = [item for item in collection if should_keep(item)]
+    return filtered_items
 
 # Implement a custom version of map, called my_map
 # my_map takes a function (transform) which it will call on every item in the
@@ -33,7 +41,9 @@ def my_filter(should_keep, collection):
 def my_map(transform, collection):
     # if you've encountered list comprehensions, this would be a
     # great place to use one
-    pass
+    transformed_items = [transform(item) for item in collection]
+    return transformed_items
+
 
 #################################################
 # NO CODE BELOW THIS POINT NEEDS TO BE MODIFIED #
@@ -99,11 +109,11 @@ def main():
     assert get_shortest_word(WORDS) == "a"
     print("get_shortest_word PASSED!")
 
-    # test behavior of my_filter (through using a helper)
+    # # test behavior of my_filter (through using a helper)
     assert get_short_words(WORDS) == ["a", "fox", "the", "dog"]
     print("get_short_words PASSED!")
 
-    # test behavior of my_map (through using a helper)
+    # # test behavior of my_map (through using a helper)
     assert get_word_lengths(WORDS) == [5, 7, 5, 1, 5, 3, 3, 3, 4]
     print("get_word_lengths PASSED!")
 
